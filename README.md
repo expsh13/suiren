@@ -5,13 +5,24 @@ Rust を学びながら作る、自分用の macOS ブラウザ。
 
 ## 開発
 
-Rust / Cargo をインストールした環境で実行する。
+Rust / Cargo、Xcode の開発ツール、CMake、Ninja が必要。
+Rust / Cargo は 1.99.1 を使用する。
+
+Homebrew でビルドツールを揃える場合：
 
 ```sh
-cargo run
+brew install cmake ninja
 ```
 
-現時点では Rust プロジェクトの雛形。`Hello, world!` を表示して終了する。
+初回ビルド時には、`cef-rs` が対応するビルド済み CEF SDK を自動で取得する。
+ビルド時には、選択中の Xcode の SDK を明示してコンパイラと揃える。
+
+```sh
+SDKROOT="$(xcrun --sdk macosx --show-sdk-path)" cargo run
+```
+
+現時点では `cef-rs`（クレート名 `cef`）154.5.0 を追加した段階。`sandbox` feature のみを有効にしている。
+実行すると `Hello, world!` を表示して終了する。CEF の初期化とウィンドウの起動は次の段階で実装する。
 
 ## MVP の範囲
 
